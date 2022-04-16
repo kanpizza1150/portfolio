@@ -51,6 +51,8 @@ export const Section = styled.div`
   }
   ${media.phone} {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
   }
 `
 export const SectionWrapper = styled.div`

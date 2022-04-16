@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-self: center;
+  z-index: 9999;
 `
 export const Line = styled.div`
   width: 1px;

@@ -1,15 +1,6 @@
 import styled, { css } from 'styled-components'
 import { boxShadow } from '../../styles'
 
-export const Wrapper = styled.div`
-  bottom: 0;
-  right: 0;
-  margin: 10px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-`
 export const SwitchWrapper = styled.div<{ isLight: boolean }>`
   border-radius: 50px;
   width: 25px;
@@ -24,7 +15,6 @@ export const SwitchWrapper = styled.div<{ isLight: boolean }>`
   cursor: pointer;
   ${boxShadow};
   background-color: ${({ theme }) => theme.fg};
-  /* border-color: ${({ theme }) => theme.fg}; */
 
   &::after,
   &::before {
@@ -45,7 +35,6 @@ export const SwitchWrapper = styled.div<{ isLight: boolean }>`
       : css`
           justify-content: flex-end;
           background-color: rgba(256, 256, 256, 0.3);
-          /* border-color: rgba(256, 256, 256, 0.3); */
           &::before {
             content: 'night';
           }

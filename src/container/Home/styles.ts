@@ -25,9 +25,11 @@ export const ContentWrapper = styled.div`
   height: 100%;
   ${media.phone} {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-evenly;
     align-items: center;
+    height: 65%;
+    margin: auto;
   }
 `
 

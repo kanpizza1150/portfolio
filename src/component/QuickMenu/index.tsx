@@ -1,9 +1,14 @@
 import { FC } from 'react'
 import GithubIcon from '../../images/GitHub'
 import LinkedInIcon from '../../images/LinkedIn'
+import { Themes } from '../../styles'
+import ThemeSwitchButton from '../ThemeSwitchButton'
 import * as Styled from './styles'
-
-const QuickMenu: FC = () => {
+interface Props {
+  theme: Themes
+  handleThemeChange: () => void
+}
+const QuickMenu: FC<Props> = ({ theme, handleThemeChange }: Props) => {
   return (
     <Styled.Wrapper>
       <Styled.LinkButton
@@ -15,6 +20,7 @@ const QuickMenu: FC = () => {
       <Styled.LinkButton href='https://github.com/kanpizza1150' target='_blank'>
         <GithubIcon width='25px' height='25px' />
       </Styled.LinkButton>
+      <ThemeSwitchButton theme={theme} handleThemeChange={handleThemeChange} />
     </Styled.Wrapper>
   )
 }

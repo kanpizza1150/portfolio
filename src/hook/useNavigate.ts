@@ -1,5 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { FC, SVGProps, useEffect, useMemo, useRef, useState } from 'react'
 import useOnScreen from './useOnScreen'
+import { ReactComponent as homeIcon } from '../images/menuIcon/home.svg'
+import { ReactComponent as skillIcon } from '../images/menuIcon/skills.svg'
+import { ReactComponent as aboutIcon } from '../images/menuIcon/about.svg'
+import { ReactComponent as qualificationIcon } from '../images/menuIcon/qualification.svg'
+import { ReactComponent as portfolioIcon } from '../images/menuIcon/portfolio.svg'
+import { ReactComponent as contactIcon } from '../images/menuIcon/contact.svg'
 
 export enum Sections {
   HOME = 'Home',
@@ -8,6 +14,15 @@ export enum Sections {
   QUALIFICATION = 'Qualification',
   PORTFOLIO = 'Portfolio',
   CONTACT_ME = 'Contact me',
+}
+
+export const MenuLogo: Record<Sections, FC<SVGProps<SVGSVGElement>>> = {
+  [Sections.HOME]: homeIcon,
+  [Sections.ABOUT]: aboutIcon,
+  [Sections.SKILLS]: skillIcon,
+  [Sections.QUALIFICATION]: qualificationIcon,
+  [Sections.PORTFOLIO]: portfolioIcon,
+  [Sections.CONTACT_ME]: contactIcon,
 }
 const useNavigate = () => {
   const [activeSection, setActiveSection] = useState<Sections>(Sections.HOME)

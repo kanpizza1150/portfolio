@@ -12,9 +12,9 @@ import Skills from './container/Skills'
 import Qualification from './container/Qualification'
 import Portfolio from './container/Portfolio'
 import Contact from './container/Contact'
-import ThemeSwitchButton from './component/ThemeSwitchButton'
 import Nav from './component/Nav'
 import Footer from './component/Footer'
+import QuickMenu from './component/QuickMenu'
 
 const App: FC = () => {
   const { theme, handleThemeChanges, themeProps } = useTheme()
@@ -53,10 +53,7 @@ const App: FC = () => {
             handleSectionChange={handleSectionChange}
             sectionRef={refs.contactRef}
           />
-          <ThemeSwitchButton
-            handleThemeChange={handleThemeChanges}
-            theme={theme}
-          />
+          <QuickMenu handleThemeChange={handleThemeChanges} theme={theme} />
           <Footer />
         </SectionWrapper>
       </Container>
