@@ -19,10 +19,15 @@ const ButtonStyled = styled.button`
 `
 interface Props {
   children: any
-  onClick: () => void
+  onClick?: () => void
+  className?: string
 }
-const Button: FC<Props> = ({ children, onClick }: Props) => {
-  return <ButtonStyled onClick={onClick}>{children}</ButtonStyled>
+const Button: FC<Props> = ({ children, onClick, className }: Props) => {
+  return (
+    <ButtonStyled onClick={onClick} className={className}>
+      {children}
+    </ButtonStyled>
+  )
 }
 
 export default Button

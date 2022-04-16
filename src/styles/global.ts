@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle, css } from 'styled-components'
 import { media } from './media'
 import { ThemeType } from './theme'
+import { motion } from 'framer-motion'
 
 export default createGlobalStyle<{ theme: ThemeType }>`${css`
   * {
@@ -30,6 +31,11 @@ export default createGlobalStyle<{ theme: ThemeType }>`${css`
   }
   h3 {
     text-align: center;
+    margin-bottom: 20px;
+  }
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.fg};
   }
 `}
 `
@@ -39,7 +45,7 @@ export const Container = styled.div`
   grid-template-rows: ${({ theme }) =>
     `${theme.navHeight} calc(100vh - ${theme.navHeight})`};
 `
-export const Section = styled.div`
+export const Section = styled(motion.div)`
   padding: 20px 100px;
   height: ${({ theme }) => `calc(100vh - ${theme.navHeight})`};
   position: relative;

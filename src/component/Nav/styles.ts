@@ -25,9 +25,13 @@ export const ListWrapper = styled.div`
   }
 `
 export const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  display: none;
+  ${media.tablet} {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
 `
 export const List = styled.div<{ isActive: boolean }>`
   justify-self: center;

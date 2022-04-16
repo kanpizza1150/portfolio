@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import { media } from '../../styles'
+import { motion } from 'framer-motion'
 
-export const ProfileImageWrapper = styled.div`
+export const ProfileImageWrapper = styled(motion.div)`
   padding: 9px;
   padding-bottom: 0;
   overflow: hidden;
