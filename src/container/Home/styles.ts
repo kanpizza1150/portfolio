@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import { media } from '../../styles'
-import { motion } from 'framer-motion'
+import { media, Section } from '../../styles'
+import { MotionDiv } from '../../utils/motion'
 
-export const ProfileImageWrapper = styled(motion.div)`
+export const ProfileImageWrapper = styled(MotionDiv)`
   padding: 9px;
   padding-bottom: 0;
   overflow: hidden;
@@ -74,4 +74,8 @@ export const ImageSection = styled.div`
   display: flex;
   flex-direction: center;
   align-items: center;
+`
+
+export const SectionWrapper = styled(Section)`
+  height: ${({ theme }) => `calc(100vh - ${theme.navHeight})`};
 `

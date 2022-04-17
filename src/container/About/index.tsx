@@ -1,81 +1,150 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import * as Styled from './styles'
-import { Section } from '../../styles'
 import { PageProps } from '../../interface'
 import resume from '../../images/resume.pdf'
 import { ReactComponent as DownloadIcon } from '../../images/download.svg'
-import { motion, AnimatePresence } from 'framer-motion'
+import {
+  AnimateSharedLayout,
+  AnimatePresence,
+  useAnimation,
+} from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import {
+  listVerticalVariants,
+  listWrapperVariants,
+  scaleUpVariants,
+  MotionH1,
+  MotionH3,
+} from '../../utils/motion'
+import { TextButton } from '../../component/Button'
+import { Sections } from '../../hook/useNavigate'
+import { Section } from '../../styles'
+interface IItem {
+  title: string
+  subtitle: string
+  id?: string
+  link?: Sections
+  onLinkClick?: () => void
+  inView?: boolean
+}
 const About: FC<PageProps> = ({
   handleSectionChange,
   sectionRef,
 }: PageProps) => {
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const items = [
-    { id: '1', title: '2+', subtitle: 'years experience' },
-    { id: '2', title: '1', subtitle: 'completed projects' },
-    { id: '3', title: '2', subtitle: 'companies' },
+  const { ref, inView } = useInView()
+  const wrapperAnimation = useAnimation()
+  const buttonAnimation = useAnimation()
+  useEffect(() => {
+    if (inView) {
+      wrapperAnimation.start('visible')
+      buttonAnimation.start('visible')
+    } else {
+      wrapperAnimation.start('hidden')
+      buttonAnimation.start('hidden')
+    }
+  }, [inView, wrapperAnimation, buttonAnimation])
+
+  const items: IItem[] = [
+    {
+      id: '1',
+      title: '02+',
+      subtitle: 'years experience',
+      link: Sections.QUALIFICATION,
+    },
+    {
+      id: '2',
+      title: '01',
+      subtitle: 'completed projects',
+      link: Sections.PORTFOLIO,
+    },
+    {
+      id: '3',
+      title: '02',
+      subtitle: 'companies',
+      link: Sections.QUALIFICATION,
+    },
   ]
-  const item = { id: '1', title: 'test', subtitle: 'test' }
   return (
     <Section ref={sectionRef}>
-      <h1>About Me</h1>
-      <h3>My introduction</h3>
-
-      <Styled.ContentWrapper>
-        <div>
-          <Styled.Info>
-            An adaptive Frontend Developer with 2+ years of experience in
-            building and maintaining web apps. Proficient in CSS, HTML,
-            Javascript using ReactJS library with typescript. Experience with
-            NestJS and PostgreSQL. Seeking challenges and opportunities that
-            will enhance self-development. Keen on exploring new areas in
-            technology.
-          </Styled.Info>
-          {/* <div>
-            <div>
-              <div>2+</div>
-              <div>years experience</div>
-            </div>
-            <div>
-              <div>1</div>
-              <div>completed projects</div>
-            </div>
-            <div>
-              <div>2</div>
-              <div>companies</div>
-            </div>
-          </div> */}
-          {items.map((item) => (
-            <motion.div
-              layoutId={item.id}
-              onClick={() => setSelectedId(item.id)}
-            >
-              <motion.h5>{item.subtitle}</motion.h5>
-              <motion.h2>{item.title}</motion.h2>
-            </motion.div>
-          ))}
-
-          <AnimatePresence>
-            {selectedId && (
-              <motion.div layoutId={selectedId}>
-                <motion.h5>{item.subtitle}</motion.h5>
-                <motion.h2>{item.title}</motion.h2>
-                <motion.button onClick={() => setSelectedId(null)}>
-                  close
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <a href={resume} download='kanpichcha_resume.pdf'>
-            <Styled.DownLoadButton>
-              <DownloadIcon />
-              <p>Download CV</p>
-            </Styled.DownLoadButton>
-          </a>
-        </div>
+      <MotionH1>About Me</MotionH1>
+      <MotionH3>My introduction</MotionH3>
+      <Styled.ContentWrapper ref={ref}>
+        <Styled.Info>
+          An adaptive Frontend Developer with 2+ years of experience in building
+          and maintaining web apps. Proficient in CSS, HTML, Javascript using
+          ReactJS library with typescript. Experience with NestJS and
+          PostgreSQL.
+        </Styled.Info>
+        <AnimateSharedLayout>
+          <Styled.InLineCardWrapper
+            layout
+            variants={listWrapperVariants}
+            animate={wrapperAnimation}
+            initial={listWrapperVariants.hidden}
+          >
+            {items.map((item) => (
+              <Item
+                key={item.id}
+                title={item.title}
+                subtitle={item.subtitle}
+                onLinkClick={(): void =>
+                  handleSectionChange(item.link as Sections)
+                }
+                inView={inView}
+              />
+            ))}
+          </Styled.InLineCardWrapper>
+          <Styled.DownloadLink
+            href={resume}
+            download='kanpichcha_resume.pdf'
+            variants={scaleUpVariants}
+            initial={scaleUpVariants.hidden}
+            animate={buttonAnimation}
+          >
+            <p>Download CV</p>
+            <DownloadIcon width={20} />
+          </Styled.DownloadLink>
+        </AnimateSharedLayout>
       </Styled.ContentWrapper>
     </Section>
+  )
+}
+
+const Item = ({ title, subtitle, onLinkClick, inView }: IItem) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const toggleOpen = () => setIsOpen(!isOpen)
+  useEffect(() => {
+    if (!inView) {
+      setIsOpen(false)
+    }
+  }, [inView])
+
+  return (
+    <Styled.InlineCard
+      layout
+      onClick={toggleOpen}
+      variants={listVerticalVariants}
+      initial={listVerticalVariants.hidden}
+    >
+      <Styled.CardHeader>{title}</Styled.CardHeader>
+      <Styled.CardSubHeader>{subtitle}</Styled.CardSubHeader>
+      <AnimatePresence>
+        {isOpen && onLinkClick && <Content onLinkClick={onLinkClick} />}
+      </AnimatePresence>
+    </Styled.InlineCard>
+  )
+}
+
+const Content = ({ onLinkClick }: { onLinkClick: IItem['onLinkClick'] }) => {
+  return (
+    <Styled.ExpandedCard
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {onLinkClick && <TextButton onClick={onLinkClick}>See more →</TextButton>}
+    </Styled.ExpandedCard>
   )
 }
 

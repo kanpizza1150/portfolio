@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { media } from '../../styles'
 import hexToRgba from 'hex-to-rgba'
+import { wiggleAnimation } from '../../styles/animation'
 export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
@@ -27,10 +28,11 @@ export const ListWrapper = styled.div`
 export const Icon = styled.div`
   display: none;
   ${media.tablet} {
+    transition: 0.3s all ease-out;
     display: flex;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
   }
 `
 export const List = styled.div<{ isActive: boolean }>`
@@ -67,24 +69,33 @@ export const List = styled.div<{ isActive: boolean }>`
 
   ${media.tablet} {
     transition: 0.3s all ease;
-    /* color: ${({ theme }) => theme.fg}; */
-    height: 40px;
-    /* margin: 5px 0; */
-    padding: 5px 5px 5px 20px;
-    /* border-radius: 20px 0 0 20px; */
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    text-align: center;
+    color: ${({ theme }) => theme.bg};
+
     &:hover {
-      color: ${({ theme }) => theme.fg};
-      background-color: ${({ theme }) => theme.primary};
+      color: ${({ theme }) => theme.primary};
+      &${Icon} {
+        transform: scale(3);
+      }
+    }
+    &:hover ${Icon} {
+      transform: scale(1.2);
     }
     ${({ isActive, theme }) =>
       isActive
         ? css`
-            color: ${({ theme }) => theme.fg};
-            background-color: ${({ theme }) => theme.primary};
-
+            color: ${theme.primary};
+            font-weight: bold;
+            ${Icon} {
+              animation: ${wiggleAnimation} 3s infinite;
+            }
             &:after {
               display: none;
             }
@@ -107,33 +118,37 @@ export const Title = styled.div`
 `
 
 export const MenuSlider = styled.div<{ isActive: boolean }>`
-  transition: 0.3s ease all;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  height: 100vh;
-  border-radius: 0 20px 20px 0;
+  display: none;
+  ${media.tablet} {
+    transition: 0.3s ease all;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    width: 100vw;
 
-  ${({ isActive }) =>
-    isActive
-      ? css`
-          width: 50vw;
-          z-index: 999;
-          background-color: ${({ theme }) => hexToRgba(theme.fg, 0.5)};
-          backdrop-filter: saturate(180%) blur(10px);
-          ${ListWrapperInBurger} {
-            display: flex;
-          }
-        `
-      : css`
-          width: 46px;
-          ${ListWrapperInBurger} {
-            display: none;
-          }
-        `}
+    ${({ isActive }) =>
+      isActive
+        ? css`
+            height: 300px;
+            z-index: 999;
+            background-color: ${({ theme }) => hexToRgba(theme.fg, 0.7)};
+            backdrop-filter: saturate(180%) blur(10px);
+            ${ListWrapperInBurger} {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              grid-auto-rows: 100px;
+            }
+          `
+        : css`
+            height: 46px;
+            ${ListWrapperInBurger} {
+              display: none;
+            }
+          `}
+  }
 `
 export const Overlay = styled.div<{ isActive: boolean }>`
   transition: 0.3s ease all;
@@ -152,9 +167,7 @@ export const Overlay = styled.div<{ isActive: boolean }>`
     `}
 `
 
-export const ListWrapperInBurger = styled.div`
-  flex-direction: column;
-`
+export const ListWrapperInBurger = styled.div``
 export const Burger = styled.div<{ isActive: boolean }>`
   display: none;
   margin: 20px;
@@ -210,6 +223,7 @@ export const Burger = styled.div<{ isActive: boolean }>`
             }
           `
         : css`
+            background-color: ${({ theme }) => theme.bg};
             position: absolute;
             &:first-child {
               width: 20px;

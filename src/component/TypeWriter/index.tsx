@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { firaFont } from '../../styles'
+import { blinkAnimation } from '../../styles/animation'
 
 const Text = styled.pre`
-  font-family: 'Fira Code', monospace;
-  @keyframes blink {
-    from {
-      opacity: 0%;
-    }
-    to {
-      opacity: 100%;
-    }
-  }
+  ${firaFont};
   &::after {
     content: '|';
-    animation: blink 1s infinite;
+    animation: ${blinkAnimation} 1s infinite;
   }
 `
 const TypeWriter = ({ content = '', speed = 100 }) => {

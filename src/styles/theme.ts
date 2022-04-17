@@ -1,18 +1,31 @@
+import hexToRgba from 'hex-to-rgba'
+
 const commonProps = {
   navHeight: '50px',
 }
 
+export const colors = {
+  primaryDark: '#101414',
+  primaryLight: '#ffffff',
+  primary: '#017C67',
+}
 export const darkTheme = {
   ...commonProps,
-  fg: '#ffffff',
-  bg: '#101414',
-  primary: '#017C67',
+  fg: colors.primaryLight,
+  bg: colors.primaryDark,
+  primary: colors.primary,
+  boxShadow: `${hexToRgba(colors.primaryDark, 0.2)} 0px 12px 28px 11px,
+  ${hexToRgba(colors.primaryLight, 0.1)} 0px 2px 24px 0px,
+  ${hexToRgba(colors.primaryDark, 0.5)} 0px 0px 0px 1px inset`,
 }
 export const lightTheme = {
   ...commonProps,
-  fg: '#101414',
-  bg: '#ffffff',
-  primary: '#017C67',
+  fg: colors.primaryDark,
+  bg: colors.primaryLight,
+  primary: colors.primary,
+  boxShadow: `${hexToRgba(colors.primaryLight, 0.2)} 0px 12px 28px 11px,
+  ${hexToRgba(colors.primaryDark, 0.2)} 0px 2px 24px 0px,
+  ${hexToRgba(colors.primaryLight, 0.5)} 0px 0px 0px 1px inset`,
 }
 
 export type ThemeType = typeof darkTheme
