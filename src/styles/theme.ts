@@ -17,6 +17,9 @@ export const darkTheme = {
   boxShadow: `${hexToRgba(colors.primaryDark, 0.2)} 0px 12px 28px 11px,
   ${hexToRgba(colors.primaryLight, 0.1)} 0px 2px 24px 0px,
   ${hexToRgba(colors.primaryDark, 0.5)} 0px 0px 0px 1px inset`,
+  boxShadowHover: `${hexToRgba(colors.primaryDark, 0.3)} 0px 12px 28px 0px,
+  ${hexToRgba(colors.primaryLight, 0.4)} 0px 0px 15px 1px,
+  ${hexToRgba(colors.primaryDark, 0.1)} 0px 0px 0px 1px inset`,
 }
 export const lightTheme = {
   ...commonProps,
@@ -26,6 +29,9 @@ export const lightTheme = {
   boxShadow: `${hexToRgba(colors.primaryLight, 0.2)} 0px 12px 28px 11px,
   ${hexToRgba(colors.primaryDark, 0.2)} 0px 2px 24px 0px,
   ${hexToRgba(colors.primaryLight, 0.5)} 0px 0px 0px 1px inset`,
+  boxShadowHover: `${hexToRgba(colors.primaryLight, 0.3)} 0px 12px 28px 0px,
+  ${hexToRgba(colors.primaryDark, 0.4)} 0px 0px 15px 1px,
+  ${hexToRgba(colors.primaryLight, 0.1)} 0px 0px 0px 1px inset`,
 }
 
 export type ThemeType = typeof darkTheme

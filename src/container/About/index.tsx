@@ -13,12 +13,11 @@ import {
   listVerticalVariants,
   listWrapperVariants,
   scaleUpVariants,
-  MotionH1,
-  MotionH3,
 } from '../../utils/motion'
 import { TextButton } from '../../component/Button'
 import { Sections } from '../../hook/useNavigate'
 import { Section } from '../../styles'
+import Header from '../../component/Header'
 interface IItem {
   title: string
   subtitle: string
@@ -66,8 +65,7 @@ const About: FC<PageProps> = ({
   ]
   return (
     <Section ref={sectionRef}>
-      <MotionH1>About Me</MotionH1>
-      <MotionH3>My introduction</MotionH3>
+      <Header header='About Me' subHeader='My introduction' />
       <Styled.ContentWrapper ref={ref}>
         <Styled.Info>
           An adaptive Frontend Developer with 2+ years of experience in building

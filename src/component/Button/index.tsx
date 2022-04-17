@@ -17,7 +17,7 @@ export const buttonCss = css`
   ${boxShadow};
   &:hover {
     ${boxShadowHover};
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
   }
 `
 const ButtonStyled = styled(MotionButton)`

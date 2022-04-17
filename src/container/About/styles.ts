@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 import { buttonCss } from '../../component/Button'
 import { MotionA, MotionDiv } from '../../utils/motion'
-import { boxShadow, colors, firaFont, media } from '../../styles'
+import {
+  boxShadow,
+  boxShadowHover,
+  colors,
+  firaFont,
+  media,
+} from '../../styles'
+import hexToRgba from 'hex-to-rgba'
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,9 +48,9 @@ export const InLineCardWrapper = styled(MotionDiv)`
   }
 `
 export const InlineCard = styled(MotionDiv)`
-  background-color: ${colors.primaryLight};
+  background-color: ${hexToRgba(colors.primaryLight, 0.8)};
   color: ${colors.primaryDark};
-  ${boxShadow};
+  ${boxShadowHover};
   padding: 20px;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
-import { media } from '../../styles'
-import hexToRgba from 'hex-to-rgba'
+import { glassmorphism, media } from '../../styles'
 import { wiggleAnimation } from '../../styles/animation'
 export const Wrapper = styled.div`
   display: grid;
@@ -134,8 +133,7 @@ export const MenuSlider = styled.div<{ isActive: boolean }>`
         ? css`
             height: 300px;
             z-index: 999;
-            background-color: ${({ theme }) => hexToRgba(theme.fg, 0.7)};
-            backdrop-filter: saturate(180%) blur(10px);
+            ${glassmorphism};
             ${ListWrapperInBurger} {
               display: grid;
               grid-template-columns: repeat(3, 1fr);

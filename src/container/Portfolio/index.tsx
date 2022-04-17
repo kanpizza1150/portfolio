@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import Header from '../../component/Header'
 import { PageProps } from '../../interface'
 // import * as Styled from './styles'
 import { Section } from '../../styles'
@@ -8,8 +9,8 @@ const Portfolio: FC<PageProps> = ({
 }: PageProps) => {
   return (
     <Section ref={sectionRef}>
-      <h1>Portfolio</h1>
-      <h3>Most recent work</h3>
+      <Header header='Portfolio' subHeader='Most recent work' />
+
       <div>Slider show</div>
     </Section>
   )

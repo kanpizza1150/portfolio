@@ -2,6 +2,7 @@ import styled, { createGlobalStyle, css } from 'styled-components'
 import { media } from './media'
 import { ThemeType } from './theme'
 import { MotionDiv } from '../utils/motion'
+import hexToRgba from 'hex-to-rgba'
 
 export const firaFont = css`
   font-family: 'Fira Code', monospace;
@@ -76,7 +77,10 @@ export const boxShadow = css`
   box-shadow: ${({ theme }) => theme.boxShadow};
 `
 export const boxShadowHover = css`
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 28px 0px,
-    rgba(0, 0, 0, 0.2) 0px 2px 4px 0px,
-    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  box-shadow: ${({ theme }) => theme.boxShadowHover};
+`
+
+export const glassmorphism = css`
+  background-color: ${({ theme }) => hexToRgba(theme.fg, 0.7)};
+  backdrop-filter: saturate(180%) blur(10px);
 `
